@@ -11,7 +11,8 @@
   <link rel="shortcut icon" href="~/images/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicon/apple-touch-icon.png" />
   <link rel="manifest" href="~/images/favicon/site.webmanifest" />
-  <link rel="stylesheet" vite-href="~/app.css" asp-append-version="true" />
+  @* <link rel="stylesheet" vite-href="~/app.css" asp-append-version="true" /> *@
+  <link rel="stylesheet" href="~/dist/app.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -82,7 +83,7 @@
       </div>
     </div>
   </footer>
-  <script type="module" vite-src="~/app.js"></script>
+  <script type="module" src="~/dist/app.js"></script>
 
   @await RenderSectionAsync("Scripts", required: false)
 </body>
