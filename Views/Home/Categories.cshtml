@@ -1,0 +1,19 @@
+@model List<Store.Models.Category>
+@{
+    ViewData["Title"] = "التصنيفات";
+}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    @foreach (var category in Model)
+    {
+        <div class="col">
+            <div class="card aspect-video relative overflow-hidden text-white">
+                <img src="@Url.Content(@category.ImageUrl)" alt="@category.Name"
+                    class="absolute w-full h-full object-cover object-center" />
+                <div class="absolute inset-0 bg-black/30 z-2"></div>
+                <a class="absolute inset-0 z-3 flex flex-col items-center justify-center">
+                    <h5>@category.Name</h5>
+                </a>
+            </div>
+        </div>
+    }
+</div>

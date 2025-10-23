@@ -1,0 +1,13 @@
+{
+    "git.enabled": true,
+    // "editor.formatOnSave": true,
+    // "emmet.includeLanguages": {
+    //     "razor": "html"
+    // },
+    // "files.associations": {
+    //     "*.cshtml": "html"
+    // },
+    // "[html]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // }
+}

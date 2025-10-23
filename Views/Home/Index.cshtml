@@ -1,0 +1,118 @@
+﻿@using Store.Models
+@model StoreViewModel
+@{
+  ViewData["Title"] = "الرئيسية";
+  Layout = "_Hero";
+}
+<div class="text-white bg-cover bg-center relative flex flex-col items-center justify-center" style="">
+  <div class="overflow-hidden absolute top-0 start-0 end-0 bottom-0 z-1" style="">
+    <img src="~/images/hero.jpg" alt="Hero image" class="w-full h-full object-cover object-center" style="" />
+    <div class="bg-black/30 absolute top-0 start-0 end-0 bottom-0" style=""></div>
+  </div>
+  <div class="text-center flex flex-col items-center-safe z-2 container pb-6" style="padding-top: 5rem">
+    <a asp-controller="Home" asp-action="Index" title="لمسة" class="link">
+      <h1 class="text-white">لمسة</h1>
+    </a>
+    <p class="text-xl mt-2">عالم الاناقة والموضة والتخفيضات</p>
+    <a class="btn btn-outline-white pill mt-4" href="#categories">تسوقي الآن</a>
+  </div>
+  <div
+    class="flex flex-col items-center justify-center w-full absolute pointer-events-none bg-no-repeat -bottom-px -left-px -right-px leading-0 overflow-hidden mx-px text-body-bg dark:text-body-bg-dark"
+    style="width: 100%; z-index: 2">
+    <svg class="w-[120vw] md:w-[180vw]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"
+      preserveAspectRatio="none">
+      <path class="bg-white fill-current" d="M500,97C126.7,96.3,0.8,19.8,0,0v100l1000,0V1C1000,19.4,873.3,97.8,500,97z">
+      </path>
+    </svg>
+  </div>
+</div>
+<div class="container py-6">
+  <div class="mb-3">
+    <div class="mb-2 flex items-center gap-2" style="">
+      <a href="https://www.quoteread.com/quotes" title="الأقسام" class="text-black dark:text-white">
+        <h2 class="text-xl font-semibold mb-0 flex-1">الأقسام</h2>
+      </a>
+    </div>
+    <div class="flex items-center" style="">
+      <div class="w-20 border-b-2 border-primary" style=""></div>
+      <div class="border flex-1" style=""></div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    @foreach (var category in Model.Categories)
+    {
+      <div class="col">
+        <div
+          class="card aspect-video relative overflow-hidden text-white hover:scale-105 transition-transform duration-300">
+          <img src="@Url.Content(@category.ImageUrl)" alt="@category.Name"
+            class="absolute w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 bg-black/30 z-2 hover:bg-black/40 transition-colors duration-300"></div>
+          <a asp-controller="Home" asp-action="CategoryProducts" asp-route-categoryId="@category.Id"
+            class="absolute inset-0 z-3 flex flex-col items-center justify-center text-white hover:text-primary transition-colors duration-300">
+            <h5 class="font-semibold text-lg">@category.Name</h5>
+            <span class="text-sm opacity-90 mt-1">@category.Description</span>
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- المنتجات الأكثر مبيعاً -->
+<div class="container py-6">
+  <div class="mb-3">
+    <div class="mb-2 flex items-center gap-2" style="">
+      <a href="#" title="الأكثر مبيعاً" class="text-black dark:text-white">
+        <h2 class="text-xl font-semibold mb-0 flex-1">الأكثر مبيعاً</h2>
+      </a>
+    </div>
+    <div class="flex items-center" style="">
+      <div class="w-20 border-b-2 border-primary" style=""></div>
+      <div class="border flex-1" style=""></div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    @foreach (var product in Model.Bestsellers)
+    {
+      <div class="col">
+        <div class="card overflow-hidden hover:shadow-lg transition-shadow group">
+          <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id" class="block">
+            <div class="aspect-square relative overflow-hidden">
+              <img src="@Url.Content(product.ImageUrl)" alt="@product.Name"
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                الأكثر مبيعاً
+              </div>
+            </div>
+            <div class="p-3">
+              <h6 class="mb-2 text-sm font-semibold line-clamp-2 group-hover:text-primary transition-colors">@product.Name
+              </h6>
+              <p class="text-xs text-muted mb-2 line-clamp-2">@product.Description</p>
+              <div class="flex items-center justify-between">
+                <span class="text-primary font-bold">@product.Price ريال</span>
+              </div>
+            </div>
+          </a>
+          <div class="p-3 pt-0">
+            <div class="flex space-x-2">
+              <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id"
+                class="flex-1 btn btn-outline-primary btn-sm text-center">
+                عرض التفاصيل
+              </a>
+              <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-primary btn-sm">
+                <i class="icon bi-cart-plus"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="text-center mt-6">
+    <a asp-controller="Home" asp-action="Bestsellers" class="btn btn-outline-primary">
+      عرض جميع المنتجات الأكثر مبيعاً
+    </a>
+  </div>
+</div>

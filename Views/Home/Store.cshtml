@@ -1,0 +1,78 @@
+﻿@model Store.Models.StoreViewModel
+@{
+    ViewData["Title"] = ViewBag.PageTitle ?? ViewBag.CategoryName ?? "المنتجات";
+}
+<div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">🛍️ @ViewData["Title"]</h1>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">
+        <i class="fas fa-home mr-2"></i>الرئيسية
+    </a>
+</div>
+
+@if (ViewBag.CategoryName != null)
+{
+    <div class="mb-4">
+        <p class="text-gray-600">عرض منتجات تصنيف: <span class="font-semibold text-primary">@ViewBag.CategoryName</span></p>
+    </div>
+}
+
+@if (ViewBag.SearchQuery != null)
+{
+    <div class="mb-4">
+        <p class="text-gray-600">نتائج البحث عن: <span class="font-semibold text-primary">"@ViewBag.SearchQuery"</span></p>
+    </div>
+}
+
+<!-- عرض التصنيفات -->
+<div class="mb-6">
+    <h3 class="text-lg font-semibold mb-3">التصنيفات</h3>
+    <div class="flex flex-wrap gap-2">
+        <a asp-controller="Home" asp-action="Store"
+            class="btn btn-outline-primary btn-sm @(ViewBag.CategoryName == null ? "btn-primary" : "")">
+            جميع المنتجات
+        </a>
+        @foreach (var category in Model.Categories)
+        {
+            <a asp-controller="Home" asp-action="CategoryProducts" asp-route-categoryId="@category.Id"
+                class="btn btn-outline-primary btn-sm @(ViewBag.CategoryName == category.Name ? "btn-primary" : "")">
+                @category.Name
+            </a>
+        }
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @foreach (var product in Model.Products)
+    {
+        <div class="border rounded-2xl p-4 shadow hover:shadow-lg transition cursor-pointer group">
+            <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id" class="block">
+                <div class="relative overflow-hidden rounded-xl mb-3">
+                    <img src="@product.ImageUrl"
+                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                </div>
+                <h2 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">@product.Name</h2>
+                <p class="text-gray-600 mb-2 line-clamp-2">@product.Description</p>
+                <p class="font-bold text-pink-600 mb-3">@product.Price.ToString("0.00") ريال</p>
+            </a>
+            <div class="flex space-x-2">
+                <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id"
+                    class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-xl hover:bg-gray-200 transition-colors duration-300 text-center">
+                    عرض التفاصيل
+                </a>
+                <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.Id"
+                    class="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition-colors duration-300">
+                    <i class="fas fa-cart-plus"></i>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Products.Any())
+{
+    <div class="text-center py-8">
+        <p class="text-gray-500 text-lg">لا توجد منتجات متاحة حالياً</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-4">العودة للرئيسية</a>
+    </div>
+}

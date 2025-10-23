@@ -1,0 +1,18 @@
+@model List<Store.Models.Product>
+@{
+    ViewData["Title"] = "المنتجات";
+}
+<h1 class="text-2xl font-bold mb-4">🛍️ قائمة المنتجات</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+@foreach (var product in Model)
+{
+    <div class="border rounded-2xl p-4 shadow hover:shadow-lg transition">
+        <img src="@product.ImageUrl" class="w-full h-48 object-cover rounded-xl mb-3" />
+        <h2 class="text-xl font-semibold">@product.Name</h2>
+        <p class="text-gray-600 mb-2">@product.Description</p>
+        <p class="font-bold text-pink-600 mb-3">@product.Price.ToString("0.00") ريال</p>
+        <a href="/Store/AddToCart/@product.Id" class="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600">أضف إلى السلة</a>
+    </div>
+}
+</div>

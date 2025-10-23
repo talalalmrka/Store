@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "omFl1TIz1dw=",
+  "success": true,
+  "projectFilePath": "/Users/user/Desktop/laravel-projects/Store/Store.csproj",
+  "expectedPackageFiles": [
+    "/Users/user/.nuget/packages/vite.aspnetcore/2.4.1/vite.aspnetcore.2.4.1.nupkg.sha512"
+  ],
+  "logs": []
+}

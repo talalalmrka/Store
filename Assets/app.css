@@ -1,0 +1,17 @@
+@import "tailwindcss" source("../");
+@import "fadgram-ui";
+@import "./fonts/fonts.css";
+@import "./theme.css";
+@layer base {
+  body {
+    @apply relative font-rotger;
+    /* @apply antialiased; */
+    @apply text-gray-700 dark:text-gray-100;
+    @apply bg-body-bg dark:bg-body-bg-dark;
+  }
+  .header-navbar {
+    .nav-link {
+      @apply !inline-flex !items-center !gap-1;
+    }
+  }
+}

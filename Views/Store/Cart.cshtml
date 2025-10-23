@@ -1,0 +1,40 @@
+@model List<Store.Models.CartItem>
+@{
+    ViewData["Title"] = "سلة المشتريات";
+}
+<h1 class="text-2xl font-bold mb-4">🛒 سلة المشتريات</h1>
+
+@if (!Model.Any())
+{
+    <p>السلة فارغة حاليًا.</p>
+}
+else
+{
+    <table class="w-full border">
+        <thead class="bg-gray-100">
+            <tr>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="border-t">
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Product.Price * item.Quantity) ريال</td>
+                <td>
+                    <a href="/Store/Remove/@item.Product.Id" class="text-red-600">إزالة</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="mt-4 text-right">
+        <a href="/Store/Index" class="text-blue-600">متابعة التسوق</a>
+    </div>
+}
