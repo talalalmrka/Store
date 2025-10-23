@@ -1,5 +1,6 @@
 {
     "git.enabled": true,
+    "git.blame.statusBarItem.enabled": false,
     // "editor.formatOnSave": true,
     // "emmet.includeLanguages": {
     //     "razor": "html"
